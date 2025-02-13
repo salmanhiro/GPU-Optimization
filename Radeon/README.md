@@ -48,8 +48,36 @@ apt list --installed | grep rocm
 
 ## Install PyTorch with ROCm Support
 
+### Using a Docker Image with PyTorch Pre-Installed
+
+This guide will walk you through using a **Docker** container with **PyTorch** pre-installed and **ROCm** support for AMD GPUs. This approach makes it easy to get started with deep learning on an AMD GPU without the need for complex installation steps.
+
+#### Prerequisites
+
+- A system with **Docker** installed.
+- An AMD GPU compatible with **ROCm**.
+- **ROCm** already set up on your system (as outlined in the previous tutorial).
+- Proper driver setup for your AMD GPU.
+
+#### Steps
+1. **Pull the PyTorch Docker Image**: You can pull the **PyTorch** Docker image with **ROCm** support from the **ROCm** repository on Docker Hub. Run the following command to pull the image:
+
+```bash
+docker pull rocm/pytorch:latest
+```
+2. **Run the Docker Container**: Once the image is downloaded, you can run a container with the following command:
+
+```bash
+docker run -it --cap-add=SYS_PTRACE --security-opt seccomp=unconfined \
+--device=/dev/kfd --device=/dev/dri --group-add video \
+--ipc=host --shm-size 8G rocm/pytorch:latest
+
+```
+
 ## Install TensorFlow with ROCm Support
 
-## Install JAX with ROCm Support
+(Todo)
 
-## Docker Support
+### Using a Docker Image with TensorFlow Pre-Installed
+
+(Todo)
